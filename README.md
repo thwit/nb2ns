@@ -1,4 +1,4 @@
-# runipynb
+# nb2ns
 
 [![CI](https://github.com/thwit/runnb/actions/workflows/ci.yml/badge.svg)](https://github.com/thwit/runnb/actions/workflows/ci.yml)
 
@@ -7,27 +7,27 @@ Run a Jupyter notebook into your script's namespace — with full IPython magic 
 ## Install
 
 ```bash
-pip install runipynb
+pip install nb2ns
 ```
 
 ## Usage
 
 ```python
-import runipynb
+import nb2ns
 
 # Variables, functions, and imports from the notebook land in your script's globals.
-runipynb.run_notebook("analysis.ipynb")
+nb2ns.run_notebook("analysis.ipynb")
 print(result)  # defined in the notebook
 
 # Or run into an explicit dict.
 ns = {}
-runipynb.run_notebook("analysis.ipynb", ns=ns)
+nb2ns.run_notebook("analysis.ipynb", ns=ns)
 print(ns["result"])
 ```
 
 ## Magic support
 
-Because `runipynb` uses IPython's `InteractiveShell` internally, all built-in IPython magics work out of the box. The table below covers the most commonly used ones, with notes on what you can observe in the namespace after the cell runs.
+Because `nb2ns` uses IPython's `InteractiveShell` internally, all built-in IPython magics work out of the box. The table below covers the most commonly used ones, with notes on what you can observe in the namespace after the cell runs.
 
 ### Cell magics (`%%`)
 
@@ -74,7 +74,7 @@ Because `runipynb` uses IPython's `InteractiveShell` internally, all built-in IP
 
 ## How it works
 
-`runipynb` wires your script's `globals()` dict directly into an IPython `InteractiveShell` and
+`nb2ns` wires your script's `globals()` dict directly into an IPython `InteractiveShell` and
 executes each code cell with `shell.run_cell()`. This is the same execution path Jupyter itself
 uses, so line magics (`%run`, `%matplotlib`), cell magics (`%%time`, `%%capture`), and shell
 escapes (`!ls`) all work exactly as they would inside a notebook. No subprocess, no separate
