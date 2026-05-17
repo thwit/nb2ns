@@ -26,7 +26,6 @@ def run_notebook(path, ns=None, *, raise_on_error=True, chdir=True):
 
     # Use the singleton so get_ipython() works inside cells.
     shell = InteractiveShell.instance(user_ns=ns)
-    # If the singleton already existed with a different ns, rebind it.
     shell.user_ns = ns
 
     cm = _chdir(nb_path.parent) if chdir else nullcontext()
@@ -36,6 +35,9 @@ def run_notebook(path, ns=None, *, raise_on_error=True, chdir=True):
                 continue
             result = shell.run_cell(cell.source, store_history=False)
             if raise_on_error and not result.success:
-                raise (result.error_in_exec or result.error_before_exec)
+                exc = result.error_in_exec or result.error_before_exec
+                if exc is None:
+                    raise RuntimeError("cell failed with no exception captured")
+                raise exc
 
     return ns

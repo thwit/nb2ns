@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "runnb"
-version = "0.1.0"
+dynamic = ["version"]
 requires-python = ">=3.10"
 dependencies = [
     "ipython>=8.0",
@@ -13,6 +13,9 @@ dependencies = [
 
 [project.optional-dependencies]
 test = ["pytest>=7"]
+
+[tool.hatch.version]
+path = "src/runnb/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/runnb"]
