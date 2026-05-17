@@ -5,11 +5,30 @@ build-backend = "hatchling.build"
 [project]
 name = "runnb"
 dynamic = ["version"]
+description = "Run a Jupyter notebook into your script's namespace with full IPython magic support"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Thomas Witting", email = "thomaswitting97@gmail.com" }]
+keywords = ["jupyter", "notebook", "ipython", "magic"]
 requires-python = ">=3.10"
 dependencies = [
     "ipython>=8.0",
     "nbformat>=5.0",
 ]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Repository = "https://github.com/thwit/runnb"
 
 [project.optional-dependencies]
 test = ["pytest>=7"]
@@ -19,3 +38,6 @@ path = "src/runnb/__init__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/runnb"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["runnb_plan.md", ".claude/"]
